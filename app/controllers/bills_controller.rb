@@ -16,6 +16,7 @@ class BillsController < ApplicationController
   def show
     @user = User.find(params[:user_id])
     @bill = Bill.find(params[:id])
+    @items = @bill.items.all
 
     respond_to do |format|
       format.html # show.html.erb
@@ -46,7 +47,13 @@ class BillsController < ApplicationController
   def create
     @user = User.find(params[:user_id])
     params[:bill][:user_id] = params[:user_id]
+
     @bill = Bill.new(params[:bill])
+#   change time back to UTC
+#   time in form defaults to localtime
+    time = @bill.event_time
+    offset = -Time.now.localtime.gmt_offset
+    @bill.event_time = time+offset
 
     respond_to do |format|
       if @bill.save
@@ -67,7 +74,7 @@ class BillsController < ApplicationController
 
     respond_to do |format|
       if @bill.update_attributes(params[:bill])
-        format.html { redirect_to(@bill, :notice => 'Bill was successfully updated.') }
+        format.html { redirect_to(user_bill_url(@user,@bill), :notice => 'Bill was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -84,7 +91,7 @@ class BillsController < ApplicationController
     @bill.destroy
 
     respond_to do |format|
-      format.html { redirect_to(user_bills_url(@user)) }
+      format.html { redirect_to(user_url(@user)) }
       format.xml  { head :ok }
     end
   end

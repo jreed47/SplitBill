@@ -1,18 +1,22 @@
 class ItemsController < ApplicationController
+
   # GET /items
   # GET /items.xml
   def index
-    @items = Item.all
+    @bill = Bill.find(params[:bill_id])
+    @user = User.find(@bill.user_id)
+    @items = @bill.items.all
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @items }
     end
   end
-
   # GET /items/1
   # GET /items/1.xml
   def show
+    @bill = Bill.find(params[:bill_id])
+    @user = User.find(@bill.user_id)
     @item = Item.find(params[:id])
 
     respond_to do |format|
@@ -24,22 +28,29 @@ class ItemsController < ApplicationController
   # GET /items/new
   # GET /items/new.xml
   def new
+    @bill = Bill.find(params[:bill_id])
+    @user = User.find(@bill.user_id)
     @item = Item.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html  # new.html.erb
       format.xml  { render :xml => @item }
     end
   end
 
   # GET /items/1/edit
   def edit
+    @bill = Bill.find(params[:bill_id])
+    @user = User.find(@bill.user_id)
     @item = Item.find(params[:id])
   end
 
   # POST /items
   # POST /items.xml
   def create
+    @bill = Bill.find(params[:bill_id])
+    params[:item][:bill_id] = @bill
+    @user = User.find(@bill.user_id)
     @item = Item.new(params[:item])
 
     respond_to do |format|
@@ -56,6 +67,8 @@ class ItemsController < ApplicationController
   # PUT /items/1
   # PUT /items/1.xml
   def update
+    @bill = Bill.find(params[:bill_id])
+    @user = User.find(@bill.user_id)
     @item = Item.find(params[:id])
 
     respond_to do |format|
@@ -72,6 +85,8 @@ class ItemsController < ApplicationController
   # DELETE /items/1
   # DELETE /items/1.xml
   def destroy
+    @bill = Bill.find(params[:bill_id])
+    @user = User.find(@bill.user_id)
     @item = Item.find(params[:id])
     @item.destroy
 

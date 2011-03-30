@@ -1,10 +1,8 @@
 SplitBill::Application.routes.draw do
 
   resources :users do
-    resources :bills do
-      resources :items
-    end
-    #resources :items
+    resources :bills
+    resources :items
   end
 
   
