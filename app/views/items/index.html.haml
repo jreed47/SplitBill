@@ -1,0 +1,13 @@
+%h1 Listing items
+%table
+  %tr
+    %th
+    %th
+    %th
+  - @items.each do |item|
+    %tr
+      %td= link_to 'Show', user_item_path(item)
+      %td= link_to 'Edit', edit_user_item_path(@user,item)
+      %td= link_to 'Destroy', user_item_path(item), :confirm => 'Are you sure?', :method => :delete
+%br/
+= link_to 'New Item', new_user_item_path(@user,:bill_id => @bill)

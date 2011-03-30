@@ -1,0 +1,17 @@
+%h1 Listing bills
+%table
+  %tr
+    %th Name
+    %th Location
+    %th Date
+    %th Time
+    %th
+    %th
+  - @bills.each do |bill|
+    %tr
+      %td= link_to bill.name,user_bill_path(@user,bill)
+      %td= bill.receipt_loc
+      %td= bill.event_time.localtime.strftime("%m/%d/%Y")
+      %td= bill.event_time.localtime.strftime("%H:%M")
+
+= link_to 'New Bill', new_user_bill_path(@user)

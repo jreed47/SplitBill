@@ -1,0 +1,23 @@
+= form_for([@user, @bill]) do |f|
+  - if @bill.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@bill.errors.count, "error")
+        prohibited this bill from being saved:
+      %ul
+        - @bill.errors.full_messages.each do |msg|
+          %li= msg
+  .field
+    = f.label "Event Name"
+    %br/
+    = f.text_field :name
+  .field
+    = f.label "Event Location"
+    %br/
+    = f.text_field :receipt_loc
+  .field
+    = f.label :event_time
+    %br/
+    = f.datetime_select :event_time,:default=> Time.now.localtime
+  .actions
+    = f.submit

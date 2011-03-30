@@ -1,0 +1,17 @@
+%p#notice= notice
+%p
+  %b Name:
+  = @bill.name
+%p
+  %b Location:
+  = @bill.receipt_loc
+%p
+  %b Event Time:
+  = @bill.event_time
+
+= link_to 'Back', user_path(@user)
+= link_to 'Edit', edit_user_bill_path(@user, @bill)
+= link_to 'Destroy', user_bill_path(@user,@bill), :confirm => 'Are you sure?', :method => :delete
+
+
+= render(:template => 'items/index')
