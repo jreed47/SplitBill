@@ -6,5 +6,35 @@
 </p>
 
 
+<h1>Listing bills</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Location</th>
+    <th>Event Time</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @bills.each do |bill| %>
+  <tr>
+    <td><%= bill.name %></td>
+    <td><%= bill.receipt_loc %></td>
+    <td><%= bill.event_time %></td>
+    <td><%= link_to 'Show', user_bill_path(@user,bill) %></td>
+    <td><%= link_to 'Edit', edit_user_bill_path(@user,bill) %></td>
+    <td><%= link_to 'Destroy', user_bill_path(@user,bill), :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Bill', new_user_bill_path(@user) %>
+<br />
+<br />
+
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

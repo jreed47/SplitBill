@@ -4,6 +4,8 @@ class CreateItems < ActiveRecord::Migration
       t.string :name
       t.float :price
       t.boolean :paid
+      t.integer :user_id
+      t.integer :bill_id
 
       t.timestamps
     end

@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(:version => 20110329233541) do
     t.string   "name"
     t.string   "receipt_loc"
     t.datetime "event_time"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -24,6 +25,8 @@ ActiveRecord::Schema.define(:version => 20110329233541) do
     t.string   "name"
     t.float    "price"
     t.boolean  "paid"
+    t.integer  "user_id"
+    t.integer  "bill_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

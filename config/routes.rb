@@ -1,10 +1,13 @@
 SplitBill::Application.routes.draw do
-  resources :bills
 
-  resources :users
+  resources :users do
+    resources :bills do
+      resources :items
+    end
+    #resources :items
+  end
 
-  resources :items
-
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

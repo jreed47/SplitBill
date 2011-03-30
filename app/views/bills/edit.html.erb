@@ -2,5 +2,5 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @bill %> |
-<%= link_to 'Back', bills_path %>
+<%= link_to 'Show', user_bill_path(@user, @bill) %> |
+<%= link_to 'Back', user_bills_path(@user) %>
