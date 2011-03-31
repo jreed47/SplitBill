@@ -1,4 +1,4 @@
-= form_for(@item, :url=> {:action => "create", :bill_id => @bill} ) do |f|
+= form_for(@item) do |f|
   - if @item.errors.any?
     #error_explanation
       %h2
@@ -14,17 +14,11 @@
     = f.text_field :name
 
   .field
-    = f.label "Debtor"
-    %br/
-    = f.text_field :user_id
-
-  .field
     = f.label "Price"
     %br/
     = f.text_field :price
-
-
-
+  .field
+    = f.hidden_field :bill_id
   .actions
     = f.submit
 

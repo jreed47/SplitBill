@@ -1,0 +1,17 @@
+%h1 Listing ledgers
+
+%table
+  %tr
+    %th
+    %th
+    %th
+
+  - @ledgers.each do |ledger|
+    %tr
+      %td= link_to 'Show', ledger
+      %td= link_to 'Edit', edit_ledger_path(ledger)
+      %td= link_to 'Destroy', ledger, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Ledger', new_ledger_path

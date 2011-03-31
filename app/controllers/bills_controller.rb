@@ -16,7 +16,7 @@ class BillsController < ApplicationController
   def show
     @user = User.find(params[:user_id])
     @bill = Bill.find(params[:id])
-    @items = @bill.items.all
+    @items = Item.find_all_by_bill_id(@bill)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -46,9 +46,8 @@ class BillsController < ApplicationController
   # POST /bills.xml
   def create
     @user = User.find(params[:user_id])
-    params[:bill][:user_id] = params[:user_id]
+    @bill = @user.bills.build(params[:bill])
 
-    @bill = Bill.new(params[:bill])
 #   change time back to UTC
 #   time in form defaults to localtime
     time = @bill.event_time

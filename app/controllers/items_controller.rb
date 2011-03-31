@@ -3,8 +3,7 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.xml
   def index
-    @bill = Bill.find(params[:bill_id])
-    @user = User.find(@bill.user_id)
+    @bill = Bill.find(:id)
     @items = @bill.items.all
 
     respond_to do |format|
@@ -15,9 +14,15 @@ class ItemsController < ApplicationController
   # GET /items/1
   # GET /items/1.xml
   def show
-    @bill = Bill.find(params[:bill_id])
-    @user = User.find(@bill.user_id)
     @item = Item.find(params[:id])
+    @bill = Bill.find(@item.bill_id)
+    @user = User.find(@bill.user_id)
+
+    @ledgers = Ledger.find_all_by_item_id(params[:id])
+    @borrowers = []
+    @ledgers.each do |ledger|
+      @borrowers << ledger.user_id
+    end
 
     respond_to do |format|
       format.html # show.html.erb
@@ -29,8 +34,10 @@ class ItemsController < ApplicationController
   # GET /items/new.xml
   def new
     @bill = Bill.find(params[:bill_id])
-    @user = User.find(@bill.user_id)
-    @item = Item.new
+    @user = @bill.user
+    @item = @bill.items.new
+#    @user = User.find(@bill.user_id)
+#    @item = Items.new
 
     respond_to do |format|
       format.html  # new.html.erb
@@ -40,22 +47,27 @@ class ItemsController < ApplicationController
 
   # GET /items/1/edit
   def edit
-    @bill = Bill.find(params[:bill_id])
-    @user = User.find(@bill.user_id)
     @item = Item.find(params[:id])
+    @bill = @item.bill
+    @user = @bill.user
+
+
+#    @bill = Bill.find(@item.bill_id)
+#    @user = User.find(@bill.user_id)
   end
 
   # POST /items
   # POST /items.xml
   def create
-    @bill = Bill.find(params[:bill_id])
-    params[:item][:bill_id] = @bill
-    @user = User.find(@bill.user_id)
-    @item = Item.new(params[:item])
+    #find the bill that the item belongs to
+    @bill = Bill.find(params[:item][:bill_id])
+    @user = @bill.user
+
+    @item = @bill.items.build(params[:item])
 
     respond_to do |format|
       if @item.save
-        format.html { redirect_to(@item, :notice => 'Item was successfully created.') }
+        format.html { redirect_to(user_bill_path(@user,@bill), :notice => 'Item was successfully created.') }
         format.xml  { render :xml => @item, :status => :created, :location => @item }
       else
         format.html { render :action => "new" }
@@ -67,8 +79,8 @@ class ItemsController < ApplicationController
   # PUT /items/1
   # PUT /items/1.xml
   def update
-    @bill = Bill.find(params[:bill_id])
-    @user = User.find(@bill.user_id)
+    @bill = Bill.find(params[:item][:bill_id])
+    @user = @bill.user
     @item = Item.find(params[:id])
 
     respond_to do |format|
@@ -85,13 +97,13 @@ class ItemsController < ApplicationController
   # DELETE /items/1
   # DELETE /items/1.xml
   def destroy
-    @bill = Bill.find(params[:bill_id])
-    @user = User.find(@bill.user_id)
     @item = Item.find(params[:id])
+    @bill = @item.bill
+    @user = @bill.user
     @item.destroy
 
     respond_to do |format|
-      format.html { redirect_to(items_url) }
+      format.html { redirect_to(user_bill_url(@user,@bill)) }
       format.xml  { head :ok }
     end
   end

@@ -1,0 +1,10 @@
+= form_for @ledger do |f|
+  -if @ledger.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@ledger.errors.count, "error")} prohibited this ledger from being saved:"
+      %ul
+        - @ledger.errors.full_messages.each do |msg|
+          %li= msg
+
+  .actions
+    = f.submit 'Save'

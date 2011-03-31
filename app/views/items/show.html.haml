@@ -1,4 +1,23 @@
 %p#notice= notice
 
-= link_to 'Edit', edit_user_item_path(@user,@item, :bill_id => @bill)
+%h1
+  =@bill.name
+%p
+  %b Item Name:
+  =@item.name
+%p
+  %b Price:
+  =@item.price
+
+= link_to 'Edit', edit_item_path(@item)
 = link_to 'Back', user_bill_path(@user,@bill)
+
+%h1 Borrower
+%table
+  %tr
+    %th Name
+    %th
+  - @borrowers.each do |borrower|
+    %tr
+      %td= borrower.name
+      %td

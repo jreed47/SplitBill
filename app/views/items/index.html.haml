@@ -1,13 +1,17 @@
 %h1 Listing items
 %table
   %tr
+    %th Name
+    %th Price
     %th
     %th
     %th
   - @items.each do |item|
     %tr
-      %td= link_to 'Show', user_item_path(item)
-      %td= link_to 'Edit', edit_user_item_path(@user,item)
-      %td= link_to 'Destroy', user_item_path(item), :confirm => 'Are you sure?', :method => :delete
-%br/
-= link_to 'New Item', new_user_item_path(@user,:bill_id => @bill)
+      %td= item.name
+      %td= item.price
+      %td= link_to 'Show', item_path(item)
+      %td= link_to 'Destroy', item_path(item), :confirm => 'Are you sure?', :method => :delete
+%br
+
+= link_to 'New Item', new_item_path(:bill_id => @bill)
