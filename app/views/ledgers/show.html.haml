@@ -1,6 +1,16 @@
 %p#notice= notice
 
+%h1 Loan Details
+%p
+  %b Item:
+  =@item.name
+%p
+  %b Borrower:
+  =User.find(@ledger.user_id).name
+%p
+  %b Amount:
+  =@ledger.money_owed
 
-= link_to 'Edit', edit_ledger_path(@ledger)
-\|
-= link_to 'Back', ledgers_path
+
+= link_to 'Edit', edit_item_ledger_path(@item,@ledger)
+= link_to 'Back', item_path(@item)

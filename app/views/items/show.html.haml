@@ -12,12 +12,5 @@
 = link_to 'Edit', edit_item_path(@item)
 = link_to 'Back', user_bill_path(@user,@bill)
 
-%h1 Borrower
-%table
-  %tr
-    %th Name
-    %th
-  - @borrowers.each do |borrower|
-    %tr
-      %td= borrower.name
-      %td
+= render :template => "ledgers/index"
+

@@ -19,10 +19,6 @@ class ItemsController < ApplicationController
     @user = User.find(@bill.user_id)
 
     @ledgers = Ledger.find_all_by_item_id(params[:id])
-    @borrowers = []
-    @ledgers.each do |ledger|
-      @borrowers << ledger.user_id
-    end
 
     respond_to do |format|
       format.html # show.html.erb
@@ -36,6 +32,7 @@ class ItemsController < ApplicationController
     @bill = Bill.find(params[:bill_id])
     @user = @bill.user
     @item = @bill.items.new
+
 #    @user = User.find(@bill.user_id)
 #    @item = Items.new
 
@@ -107,4 +104,5 @@ class ItemsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
 end

@@ -1,17 +1,19 @@
-%h1 Listing ledgers
+%h1 Listing Owners
 
 %table
   %tr
-    %th
+    %th Name
+    %rh Money Owed
     %th
     %th
 
   - @ledgers.each do |ledger|
     %tr
-      %td= link_to 'Show', ledger
-      %td= link_to 'Edit', edit_ledger_path(ledger)
-      %td= link_to 'Destroy', ledger, :confirm => 'Are you sure?', :method => :delete
+      %td= User.find(ledger.user_id).name
+      %td= ledger.money_owed
+      %td= link_to 'Show', item_ledger_path(@item,ledger)
+      %td= link_to 'Destroy', item_ledger_path(@item,ledger), :confirm => 'Are you sure?', :method => :delete
 
 %br
 
-= link_to 'New Ledger', new_ledger_path
+= link_to 'New Ledger', new_item_ledger_path(@item)
