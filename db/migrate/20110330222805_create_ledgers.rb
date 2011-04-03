@@ -4,6 +4,7 @@ class CreateLedgers < ActiveRecord::Migration
       t.integer :user_id
       t.integer :item_id
       t.float :money_owed
+      t.float :money_paid
 
       t.timestamps
     end

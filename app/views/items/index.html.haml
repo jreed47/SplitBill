@@ -1,17 +1,38 @@
 %h1 Listing items
-%table
-  %tr
-    %th Name
-    %th Price
-    %th
-    %th
-    %th
-  - @items.each do |item|
+#item
+  %table
     %tr
-      %td= item.name
-      %td= item.price
-      %td= link_to 'Show', item_path(item)
-      %td= link_to 'Destroy', item_path(item), :confirm => 'Are you sure?', :method => :delete
+      %th Name
+      %th Price
+      %th
+      %th
+      %th
+      %th
+    - @items.each do |item|
+      %tr
+        %td= item.name
+        %td= item.price
+        %td= link_to 'Add Splitee', new_item_ledger_path(item)
+        %td= link_to 'Show', item_path(item)
+        %td= link_to 'Destroy', item_path(item), :confirm => 'Are you sure?', :method => :delete
+      -if not item.ledgers.all.empty?
+        %tr.ledger_row
+          %td
+            %table.ledger_table
+              %tr
+                %th Name
+                %th Money Owed
+                %th Money Paid
+                %th
+                %th
+              - item.ledgers.all.each do |ledger|
+                %tr
+                  %td= User.find(ledger.user_id).name
+                  %td= ledger.money_owed
+                  %td= ledger.money_paid
+                  %td= link_to 'Show', item_ledger_path(item,ledger)
+                  %td= link_to 'Destroy', item_ledger_path(item,ledger), :confirm => 'Are you sure?', :method => :delete
+
 %br
 
 = link_to 'New Item', new_item_path(:bill_id => @bill)

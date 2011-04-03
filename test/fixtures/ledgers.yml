@@ -7,3 +7,17 @@ one:
 two:
   user_id: 1
   item_id: 1
+
+# == Schema Information
+#
+# Table name: ledgers
+#
+#  id         :integer         not null, primary key
+#  user_id    :integer
+#  item_id    :integer
+#  money_owed :float
+#  paid       :boolean
+#  created_at :datetime
+#  updated_at :datetime
+#
+

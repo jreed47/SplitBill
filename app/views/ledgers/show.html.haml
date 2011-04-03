@@ -8,9 +8,11 @@
   %b Borrower:
   =User.find(@ledger.user_id).name
 %p
-  %b Amount:
+  %b Amount Owed:
   =@ledger.money_owed
-
+%p
+  %b Amount Paid:
+  =@ledger.paid
 
 = link_to 'Edit', edit_item_ledger_path(@item,@ledger)
 = link_to 'Back', item_path(@item)

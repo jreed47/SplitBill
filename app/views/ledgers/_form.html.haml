@@ -7,10 +7,12 @@
           %li= msg
   .field
     %b Borrower:
-    =f.text_field :user_id
+    = f.text_field :user_id
   .field
     %b Amount Borrowed:
-    =f.text_field :money_owed
-
+    = f.text_field :money_owed
+  .field
+    %b Amount Paid:
+    = f.text_field :money_paid
   .actions
     = f.submit 'Save'

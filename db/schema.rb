@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(:version => 20110330222805) do
 
   create_table "bills", :force => true do |t|
     t.string   "name"
-    t.string   "receipt_loc"
+    t.string   "location"
     t.datetime "event_time"
     t.integer  "user_id"
     t.datetime "created_at"
@@ -24,8 +24,6 @@ ActiveRecord::Schema.define(:version => 20110330222805) do
   create_table "items", :force => true do |t|
     t.string   "name"
     t.float    "price"
-    t.boolean  "paid"
-    t.integer  "ledger_id"
     t.integer  "bill_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -35,13 +33,13 @@ ActiveRecord::Schema.define(:version => 20110330222805) do
     t.integer  "user_id"
     t.integer  "item_id"
     t.float    "money_owed"
+    t.float    "money_paid"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|
     t.string   "name"
-    t.integer  "ledger_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

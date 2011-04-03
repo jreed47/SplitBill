@@ -9,6 +9,9 @@ gem 'sqlite3'
 gem 'haml'
 gem 'haml-rails'
 
+group :development do
+  gem 'annotate'
+end
 # Use unicorn as the web server
 # gem 'unicorn'
 

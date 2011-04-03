@@ -1,9 +1,8 @@
-%h1 Listing Owners
-
 %table
   %tr
     %th Name
-    %rh Money Owed
+    %th Money Owed
+    %th Money Paid
     %th
     %th
 
@@ -11,9 +10,10 @@
     %tr
       %td= User.find(ledger.user_id).name
       %td= ledger.money_owed
+      %td= ledger.money_paid
       %td= link_to 'Show', item_ledger_path(@item,ledger)
       %td= link_to 'Destroy', item_ledger_path(@item,ledger), :confirm => 'Are you sure?', :method => :delete
 
 %br
 
-= link_to 'New Ledger', new_item_ledger_path(@item)
+= link_to 'New Splitee', new_item_ledger_path(@item)

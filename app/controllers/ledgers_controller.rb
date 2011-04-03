@@ -27,6 +27,7 @@ class LedgersController < ApplicationController
   # GET /ledgers/new.xml
   def new
     @item = Item.find(params[:item_id])
+    @bill = @item.bill
     @ledger = @item.ledgers.new
 
     respond_to do |format|

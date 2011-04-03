@@ -6,7 +6,6 @@ SplitBill::Application.routes.draw do
 
   resources :items do
     resources :ledgers
-
   end
 
 

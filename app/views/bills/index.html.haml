@@ -10,7 +10,7 @@
   - @bills.each do |bill|
     %tr
       %td= link_to bill.name,user_bill_path(@user,bill)
-      %td= bill.receipt_loc
+      %td= bill.location
       %td= bill.event_time.localtime.strftime("%m/%d/%Y")
       %td= bill.event_time.localtime.strftime("%H:%M")
 

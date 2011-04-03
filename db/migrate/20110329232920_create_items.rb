@@ -3,8 +3,6 @@ class CreateItems < ActiveRecord::Migration
     create_table :items do |t|
       t.string :name
       t.float :price
-      t.boolean :paid
-      t.integer :ledger_id
       t.integer :bill_id
 
       t.timestamps
